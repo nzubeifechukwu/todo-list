@@ -1,7 +1,11 @@
+import { addNewToDo } from "./addTodoForm";
+import { home } from "./home";
 import "./styles.css";
-import { todos } from "./todos";
+import { allTodos, doingTodos, doneTodos, toBeDoneTodos } from "./todos";
 
-// const body = document.querySelector("body");
-// const todosTitle = document.createElement("h2");
-// todosTitle.textContent = todos[0].dueDate;
-// body.appendChild(todosTitle);
+// Initial render
+home(allTodos);
+
+const addTodoButton = document.querySelector("#add-todo-btn");
+
+addTodoButton.onclick = addNewToDo;

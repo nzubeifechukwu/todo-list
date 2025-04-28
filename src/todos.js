@@ -1,5 +1,6 @@
 class todo {
-  constructor(title, description, dueDate, priority /*notes, checkList*/) {
+  constructor(id, title, description, dueDate, priority /*notes, checkList*/) {
+    this.id = id;
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
@@ -7,13 +8,14 @@ class todo {
   }
 }
 
-export const todos = [
-  // new todo(
-  //   "Write",
-  //   "Write at least 100 words each day until the due date for the story I'm working on.",
-  //   new Date(2025, 5, 30),
-  //   "flexible"
-  // ),
+export const allTodos = [
+  new todo(
+    self.crypto.randomUUID(),
+    "Write",
+    "Write at least 100 words each day until the due date for the story I'm working on.",
+    new Date(2025, 5, 30),
+    "flexible"
+  ),
 ];
 export const doneTodos = [];
 export const doingTodos = [];

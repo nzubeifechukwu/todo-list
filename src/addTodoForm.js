@@ -27,7 +27,7 @@ export function addNewTodo() {
         </div>
       </fieldset>
       <fieldset>
-        <p>Priority</p>
+        <p>Type</p>
         <div>
           <input type="radio" name="type" id="personal" value="Personal" /><label
             for="personal"

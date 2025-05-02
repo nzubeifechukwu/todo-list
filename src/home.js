@@ -29,7 +29,9 @@ export function home(todos) {
     <main>
       <section id="todos">
       </section>
-      <div><button type="button" id="add-todo-btn">Add Todo</button></div>
+      <div>
+        <button type="button" id="add-todo-btn">Add Todo</button>
+      </div>
     </main>
     <footer><small>&copy; Nzube Ifechukwu</small></footer>`;
 

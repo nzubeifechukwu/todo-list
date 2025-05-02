@@ -1,3 +1,4 @@
+import { editTodo } from "./editTodo";
 import { home } from "./home";
 
 export function renderTodos(todos, section, months) {
@@ -20,8 +21,7 @@ export function renderTodos(todos, section, months) {
     const editButton = document.createElement("button");
     editButton.textContent = "Edit";
     editButton.addEventListener("click", () => {
-      // Use dialog
-      
+      editTodo(todo.id, todos);
     });
 
     todoArticle.appendChild(removeButton);

@@ -1,23 +1,51 @@
+import { addNewTodo } from "./addTodoForm";
+import { removeTodo } from "./removeTodo";
+
 export function home(todos) {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
   const body = document.querySelector("body");
 
   body.innerHTML = `<header>
       <h1>Todo List</h1>
       <nav>
-        <button type="button">Done</button><button type="button">Doing</button
-        ><button type="button">To Be Done</button
+        <button type="button">Personal</button><button type="button">Work</button
+        ><button type="button">Other</button
         ><button type="button">All</button>
       </nav>
     </header>
     <main>
-      <section id="todos">${
+      <section id="todos">
+      </section>
+      ${
         todos.length
-          ? todos.map((todo) => {
-              return `<h2>${todo.title}</h2><p>${todo.description}</p><p>${todo.dueDate}</p><p>${todo.priority}</p>`;
-            })
-          : `<p>You have no todos</p>`
-      }</section>
-      <button type="button" id="add-todo-btn">Add Todo</button>
+          ? `<div><button type="button" id="delete-all-btn">Delete All</button></div>`
+          : ""
+      }
+      <div><button type="button" id="add-todo-btn">Add Todo</button></div>
     </main>
     <footer><small>&copy; Nzube Ifechukwu</small></footer>`;
+
+  const addTodoButton = document.querySelector("#add-todo-btn");
+  addTodoButton.onclick = addNewTodo;
+  // if (todos.length) {
+  //   const removeButton = document.querySelector(".remove");
+  //   const removeOneTodo = () => {
+  //     console.log(removeButton);
+  //     removeTodo(removeButton.id, todos);
+  //   };
+  //   removeButton.onclick = removeOneTodo;
+  // }
 }

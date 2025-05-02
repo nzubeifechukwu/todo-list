@@ -1,11 +1,103 @@
-// this.title = title;
-// this.description = description;
-// this.dueDate = dueDate;
-// this.priority = priority; // use to assign todo to project category of `done`, `doing` or `to be done`
+import { home } from "./home";
+import { Todo, allTodos, personalTodos, workTodos, otherTodos } from "./todos";
 
-export function addNewToDo() {
+export function addNewTodo() {
   const body = document.querySelector("body");
-  const header = document.querySelector("header");
-  header.innerHTML = `<h1>Add New Todo</h1>`;
-  body.appendChild(header);
+  body.innerHTML = `<h1>Add New Todo</h1>
+    <form action="">
+      <fieldset>
+        <div><label for="title">Title</label
+        ><input type="text" name="title" id="title" /></div>
+        <div><label for="description">Description</label
+        ><textarea name="description" id="description"></textarea></div>
+        <div><label for="due-date">Due Date</label
+        ><input type="date" name="due-date" id="due-date" /></div>
+      </fieldset>
+      <fieldset>
+        <p>Priority</p>
+        <div>
+          <input type="radio" name="priority" id="urgent" value="Urgent" /><label
+            for="urgent"
+          >Urgent</label>
+        </div>
+        <div>
+          <input type="radio" name="priority" id="not-urgent" value="Not Urgent" checked /><label
+            for="not-urgent"
+          >Not Urgent</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <p>Priority</p>
+        <div>
+          <input type="radio" name="type" id="personal" value="Personal" /><label
+            for="personal"
+          >Personal</label>
+        </div>
+        <div>
+          <input type="radio" name="type" id="work" value="Work" /><label
+            for="work"
+          >Work</label>
+        </div>
+        <div>
+          <input type="radio" name="type" id="other" value="Other" checked /><label
+            for="other"
+          >Other</label>
+        </div>
+      </fieldset>
+      <fieldset><button type="button" id="submit">Submit</button></fieldset>
+    </form>`;
+
+  const titleInput = document.querySelector("#title");
+  const descriptionTextarea = document.querySelector("#description");
+  const dueDateInput = document.querySelector("#due-date");
+  const urgentRadio = document.querySelector("#urgent");
+  const notUrgentRadio = document.querySelector("#not-urgent");
+  const personalRadio = document.querySelector("#personal");
+  const workRadio = document.querySelector("#work");
+  const otherRadio = document.querySelector("#other");
+  const submitButton = document.querySelector("#submit");
+
+  let title, description, dueDate;
+  let priority = document.querySelector('input[name="priority"]:checked').value; // Get value of default-checked radio button
+  let type = document.querySelector('input[name="type"]:checked').value;
+
+  titleInput.addEventListener("change", () => (title = titleInput.value));
+
+  descriptionTextarea.addEventListener(
+    "change",
+    () => (description = descriptionTextarea.value)
+  );
+
+  dueDateInput.addEventListener("input", () => (dueDate = dueDateInput.value));
+
+  urgentRadio.addEventListener("change", () => (priority = urgentRadio.value));
+
+  notUrgentRadio.addEventListener(
+    "change",
+    () => (priority = notUrgentRadio.value)
+  );
+
+  personalRadio.addEventListener(
+    "change",
+    () => (priority = personalRadio.value)
+  );
+
+  workRadio.addEventListener("change", () => (priority = workRadio.value));
+
+  otherRadio.addEventListener("change", () => (priority = otherRadio.value));
+
+  submitButton.addEventListener("click", () => {
+    const newTodo = new Todo(title, description, dueDate, priority, type);
+    allTodos.push(newTodo);
+
+    if (type === "Personal") {
+      personalTodos.push(newTodo);
+    } else if (type === "Work") {
+      workTodos.push(newTodo);
+    } else {
+      otherTodos.push(newTodo);
+    }
+
+    home(allTodos);
+  });
 }

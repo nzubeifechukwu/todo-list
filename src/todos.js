@@ -1,22 +1,15 @@
-class todo {
-  constructor(id, title, description, dueDate, priority /*notes, checkList*/) {
-    this.id = id;
+export class Todo {
+  constructor(title, description, dueDate, priority, type) {
+    this.id = self.crypto.randomUUID();
     this.title = title;
     this.description = description;
-    this.dueDate = dueDate;
-    this.priority = priority; // use to assign todo to project category of `done`, `doing` or `to be done`
+    this.dueDate = new Date(dueDate);
+    this.priority = priority;
+    this.type = type; // Use to group todo into project type of 'personal', 'work' or 'other'
   }
 }
 
-export const allTodos = [
-  new todo(
-    self.crypto.randomUUID(),
-    "Write",
-    "Write at least 100 words each day until the due date for the story I'm working on.",
-    new Date(2025, 5, 30),
-    "flexible"
-  ),
-];
-export const doneTodos = [];
-export const doingTodos = [];
-export const toBeDoneTodos = [];
+export const allTodos = [];
+export const personalTodos = [];
+export const workTodos = [];
+export const otherTodos = [];

@@ -1,5 +1,5 @@
 import { addNewTodo } from "./addTodoForm";
-import { removeTodo } from "./removeTodo";
+import { renderTodos } from "./renderTodo";
 
 export function home(todos) {
   const months = [
@@ -29,23 +29,18 @@ export function home(todos) {
     <main>
       <section id="todos">
       </section>
-      ${
-        todos.length
-          ? `<div><button type="button" id="delete-all-btn">Delete All</button></div>`
-          : ""
-      }
       <div><button type="button" id="add-todo-btn">Add Todo</button></div>
     </main>
     <footer><small>&copy; Nzube Ifechukwu</small></footer>`;
 
+  const todosSection = document.querySelector("#todos");
+
+  if (todos.length) {
+    renderTodos(todos, todosSection, months);
+  } else {
+    todosSection.innerHTML = "<h2>You have no todos.</h2>";
+  }
+
   const addTodoButton = document.querySelector("#add-todo-btn");
   addTodoButton.onclick = addNewTodo;
-  // if (todos.length) {
-  //   const removeButton = document.querySelector(".remove");
-  //   const removeOneTodo = () => {
-  //     console.log(removeButton);
-  //     removeTodo(removeButton.id, todos);
-  //   };
-  //   removeButton.onclick = removeOneTodo;
-  // }
 }

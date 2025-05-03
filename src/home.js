@@ -1,7 +1,7 @@
-import { addNewTodo } from "./addTodoForm";
-import { renderTodos } from "./renderTodo";
+import { addNewTodo } from "./addTodo";
+import { renderTodos, renderTodosByType } from "./renderTodos";
 
-export function home(todos) {
+export function home(todos, todosType = "") {
   const months = [
     "January",
     "February",
@@ -18,12 +18,15 @@ export function home(todos) {
   ];
   const body = document.querySelector("body");
 
-  body.innerHTML = `<header>
+  body.innerHTML = `
+    <header>
       <h1>Todo List</h1>
       <nav>
-        <button type="button">Personal</button><button type="button">Work</button
-        ><button type="button">Other</button
-        ><button type="button">All</button>
+        <button type="button" id="personal-btn">Personal</button>
+        <button type="button" id="work-btn">Work</button>
+        <button type="button" id="other-btn">Other</button>
+        <button type="button" id="urgent-btn">Urgent</button>
+        <button type="button" id="all-btn">All</button>
       </nav>
     </header>
     <main>
@@ -33,16 +36,19 @@ export function home(todos) {
         <button type="button" id="add-todo-btn">Add Todo</button>
       </div>
     </main>
-    <footer><small>&copy; Nzube Ifechukwu</small></footer>`;
+    <footer><small>&copy; Nzube Ifechukwu</small></footer>
+  `;
 
   const todosSection = document.querySelector("#todos");
 
   if (todos.length) {
     renderTodos(todos, todosSection, months);
   } else {
-    todosSection.innerHTML = "<h2>You have no todos.</h2>";
+    todosSection.innerHTML = `<h2>You have no ${todosType} todos.</h2>`;
   }
 
   const addTodoButton = document.querySelector("#add-todo-btn");
   addTodoButton.onclick = addNewTodo;
+
+  renderTodosByType();
 }

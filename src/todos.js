@@ -13,3 +13,5 @@ export const allTodos = [];
 export const personalTodos = [];
 export const workTodos = [];
 export const otherTodos = [];
+export const urgentTodos = [];
+export const completedTodos = [];

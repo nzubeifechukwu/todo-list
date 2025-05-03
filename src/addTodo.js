@@ -1,5 +1,12 @@
 import { home } from "./home";
-import { Todo, allTodos, personalTodos, workTodos, otherTodos } from "./todos";
+import {
+  Todo,
+  allTodos,
+  personalTodos,
+  workTodos,
+  otherTodos,
+  urgentTodos,
+} from "./todos";
 
 export function addNewTodo() {
   const body = document.querySelector("body");
@@ -61,7 +68,10 @@ export function addNewTodo() {
   let priority = document.querySelector('input[name="priority"]:checked').value; // Get value of default-checked radio button
   let type = document.querySelector('input[name="type"]:checked').value;
 
-  titleInput.addEventListener("change", () => (title = titleInput.value.trim()));
+  titleInput.addEventListener(
+    "change",
+    () => (title = titleInput.value.trim())
+  );
 
   descriptionTextarea.addEventListener(
     "change",
@@ -77,10 +87,7 @@ export function addNewTodo() {
     () => (priority = notUrgentRadio.value)
   );
 
-  personalRadio.addEventListener(
-    "change",
-    () => (type = personalRadio.value)
-  );
+  personalRadio.addEventListener("change", () => (type = personalRadio.value));
 
   workRadio.addEventListener("change", () => (type = workRadio.value));
 
@@ -97,6 +104,8 @@ export function addNewTodo() {
     } else {
       otherTodos.push(newTodo);
     }
+
+    if (priority === "Urgent") urgentTodos.push(newTodo);
 
     home(allTodos);
   });

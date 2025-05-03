@@ -8,51 +8,70 @@ import {
   urgentTodos,
 } from "./todos";
 
-export function renderTodos(todos, section, months) {
-  section.innerHTML = "";
-  todos.forEach((todo, index) => {
-    const todoArticle = document.createElement("article");
-    todoArticle.innerHTML = `
+export function renderTodos(todos, section, todosType = "") {
+  if (todos.length) {
+    section.innerHTML = "";
+    todos.forEach((todo, index) => {
+      const todoArticle = document.createElement("article");
+      todoArticle.innerHTML = `
       <h2>${todo.title}</h2>
-      <p>${todo.description}</p>
-      <p>${todo.dueDate.getDate()} ${
-      months[todo.dueDate.getMonth()]
-    }, ${todo.dueDate.getFullYear()}</p>
-      <p>${todo.priority}</p>
-      <p>${todo.type}</p>
+      <p><strong>Description: </strong>${
+        todo.description ? todo.description : ""
+      }</p>
+      <p><strong>Due Date: </strong>${todo.dueDate.toDateString()}</p>
+      <p><strong>Priority: </strong>${todo.priority}</p>
+      <p><strong>Type: </strong>${todo.type}</p>
     `;
 
-    const removeButton = document.createElement("button");
-    removeButton.textContent = "Remove";
-    removeButton.addEventListener("click", () => {
-      todos.splice(index, 1);
-      home(todos);
-    });
+      const removeButton = document.createElement("button");
+      removeButton.textContent = "Remove";
+      removeButton.addEventListener("click", () => {
+        if (todo.priority === "Urgent") urgentTodos.splice(index, 1);
+        if (todo.type === "Personal") {
+          personalTodos.splice(index, 1);
+        } else if (todo.type === "Work") {
+          workTodos.splice(index, 1);
+        } else {
+          otherTodos.splice(index, 1);
+        }
+        allTodos.splice(index, 1);
+        home(todos);
+      });
 
-    const editButton = document.createElement("button");
-    editButton.textContent = "Edit";
-    editButton.addEventListener("click", () => {
-      editTodo(todo.id, todos);
-    });
+      const editButton = document.createElement("button");
+      editButton.textContent = "Edit";
+      editButton.addEventListener("click", () => {
+        editTodo(todo.id, todos);
+      });
 
-    todoArticle.appendChild(removeButton);
-    todoArticle.appendChild(editButton);
-    section.appendChild(todoArticle);
-  });
+      todoArticle.appendChild(removeButton);
+      todoArticle.appendChild(editButton);
+      section.appendChild(todoArticle);
+    });
+  } else {
+    section.innerHTML = `<h2>You have no ${todosType} todos.</h2>`;
+  }
 }
 
-export function renderTodosByType() {
+export function renderTodosByType(section) {
   const personalButton = document.querySelector("#personal-btn");
   const workButton = document.querySelector("#work-btn");
   const otherButton = document.querySelector("#other-btn");
   const allButton = document.querySelector("#all-btn");
   const urgentButton = document.querySelector("#urgent-btn");
+  section = document.querySelector("#todos");
 
-  allButton.addEventListener("click", () => home(allTodos));
+  allButton.addEventListener("click", () => renderTodos(allTodos, section));
   personalButton.addEventListener("click", () =>
-    home(personalTodos, "personal")
+    renderTodos(personalTodos, section, "personal")
   );
-  workButton.addEventListener("click", () => home(workTodos, "work"));
-  otherButton.addEventListener("click", () => home(otherTodos, "unclassified"));
-  urgentButton.addEventListener("click", () => home(urgentTodos, "urgent"));
+  workButton.addEventListener("click", () =>
+    renderTodos(workTodos, section, "work")
+  );
+  otherButton.addEventListener("click", () =>
+    renderTodos(otherTodos, section, "unclassified")
+  );
+  urgentButton.addEventListener("click", () =>
+    renderTodos(urgentTodos, section, "urgent")
+  );
 }

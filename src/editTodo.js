@@ -209,12 +209,27 @@ export function editTodo(id, todos) {
   otherRadio.addEventListener("change", () => (type = otherRadio.value));
 
   submitButton.addEventListener("click", () => {
-    selectedTodo.title = title;
-    selectedTodo.description = description;
-    selectedTodo.dueDate = new Date(dueDate);
-    selectedTodo.priority = priority;
-    selectedTodo.type = type;
+    if (!title) {
+      alert("Please input todo title");
+    } else {
+      selectedTodo.title = title;
+      selectedTodo.description = description ? description : "nil";
 
-    home(todos);
+      if (!dueDate || new Date(dueDate) < new Date()) {
+        // set to tomorrow's date if dueDate is undefined or earlier than today's date
+        selectedTodo.dueDate = new Date(
+          new Date().getFullYear(),
+          new Date().getMonth(),
+          new Date().getDate() + 1
+        );
+      } else {
+        selectedTodo.dueDate = new Date(dueDate);
+      }
+
+      selectedTodo.priority = priority;
+      selectedTodo.type = type;
+
+      home(todos);
+    }
   });
 }

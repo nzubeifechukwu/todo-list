@@ -1,23 +1,8 @@
 import { addNewTodo } from "./addTodo";
 import { renderTodos, renderTodosByType } from "./renderTodos";
 
-export function home(todos, todosType = "") {
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+export function home(todos) {
   const body = document.querySelector("body");
-
   body.innerHTML = `
     <header>
       <h1>Todo List</h1>
@@ -41,14 +26,15 @@ export function home(todos, todosType = "") {
 
   const todosSection = document.querySelector("#todos");
 
-  if (todos.length) {
-    renderTodos(todos, todosSection, months);
-  } else {
-    todosSection.innerHTML = `<h2>You have no ${todosType} todos.</h2>`;
-  }
+  // if (todos.length) {
+  //   renderTodos(todos, todosSection);
+  // } else {
+  //   todosSection.innerHTML = `<h2>You have no ${todosType} todos.</h2>`;
+  // }
+  renderTodos(todos, todosSection);
 
   const addTodoButton = document.querySelector("#add-todo-btn");
   addTodoButton.onclick = addNewTodo;
 
-  renderTodosByType();
+  renderTodosByType(todosSection);
 }

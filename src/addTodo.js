@@ -94,19 +94,29 @@ export function addNewTodo() {
   otherRadio.addEventListener("change", () => (type = otherRadio.value));
 
   submitButton.addEventListener("click", () => {
-    const newTodo = new Todo(title, description, dueDate, priority, type);
-    allTodos.push(newTodo);
-
-    if (type === "Personal") {
-      personalTodos.push(newTodo);
-    } else if (type === "Work") {
-      workTodos.push(newTodo);
+    if (!title) {
+      alert("Please input todo title");
     } else {
-      otherTodos.push(newTodo);
+      if (!description) description = "nil";
+      if (!dueDate || new Date(dueDate) < new Date()) {
+        // set to tomorrow's date if dueDate is undefined or earlier than today's date
+        dueDate = new Date();
+        dueDate = dueDate.setDate(dueDate.getDate() + 1);
+      }
+      const newTodo = new Todo(title, description, dueDate, priority, type);
+      allTodos.push(newTodo);
+
+      if (type === "Personal") {
+        personalTodos.push(newTodo);
+      } else if (type === "Work") {
+        workTodos.push(newTodo);
+      } else {
+        otherTodos.push(newTodo);
+      }
+
+      if (priority === "Urgent") urgentTodos.push(newTodo);
+
+      home(allTodos);
     }
-
-    if (priority === "Urgent") urgentTodos.push(newTodo);
-
-    home(allTodos);
   });
 }

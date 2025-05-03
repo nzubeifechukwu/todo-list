@@ -61,11 +61,11 @@ export function addNewTodo() {
   let priority = document.querySelector('input[name="priority"]:checked').value; // Get value of default-checked radio button
   let type = document.querySelector('input[name="type"]:checked').value;
 
-  titleInput.addEventListener("change", () => (title = titleInput.value));
+  titleInput.addEventListener("change", () => (title = titleInput.value.trim()));
 
   descriptionTextarea.addEventListener(
     "change",
-    () => (description = descriptionTextarea.value)
+    () => (description = descriptionTextarea.value.trim())
   );
 
   dueDateInput.addEventListener("input", () => (dueDate = dueDateInput.value));
@@ -79,12 +79,12 @@ export function addNewTodo() {
 
   personalRadio.addEventListener(
     "change",
-    () => (priority = personalRadio.value)
+    () => (type = personalRadio.value)
   );
 
-  workRadio.addEventListener("change", () => (priority = workRadio.value));
+  workRadio.addEventListener("change", () => (type = workRadio.value));
 
-  otherRadio.addEventListener("change", () => (priority = otherRadio.value));
+  otherRadio.addEventListener("change", () => (type = otherRadio.value));
 
   submitButton.addEventListener("click", () => {
     const newTodo = new Todo(title, description, dueDate, priority, type);

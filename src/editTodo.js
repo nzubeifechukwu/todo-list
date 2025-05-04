@@ -1,5 +1,11 @@
 import { home } from "./home";
-import { otherTodos, personalTodos, urgentTodos, workTodos } from "./todos";
+import {
+  allTodos,
+  otherTodos,
+  personalTodos,
+  urgentTodos,
+  workTodos,
+} from "./todos";
 
 export function editTodo(id, todos) {
   const months = [
@@ -214,6 +220,7 @@ export function editTodo(id, todos) {
   otherRadio.addEventListener("change", () => (type = otherRadio.value));
 
   submitButton.addEventListener("click", () => {
+    // Update relevant todos list based on edited values
     if (previousPriority !== priority) {
       if (priority === "Urgent") {
         urgentTodos.push(selectedTodo);
@@ -223,6 +230,7 @@ export function editTodo(id, todos) {
       }
     }
 
+    // Update relevant todos list based on edited values
     if (previousType !== type) {
       if (type === "Personal") {
         personalTodos.push(selectedTodo);
@@ -263,6 +271,12 @@ export function editTodo(id, todos) {
 
       selectedTodo.priority = priority;
       selectedTodo.type = type;
+
+      // Replace updated todo in allTodos list
+      if (previousPriority !== priority || previousType !== type) {
+        const index = allTodos.indexOf(selectedTodo);
+        allTodos.splice(index, 1, selectedTodo);
+      }
 
       home(todos);
     }

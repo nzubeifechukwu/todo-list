@@ -11,7 +11,7 @@ import {
 export function renderTodos(todos, section, todosType = "") {
   if (todos.length) {
     section.innerHTML = "";
-    todos.forEach((todo, index) => {
+    todos.forEach((todo) => {
       const todoArticle = document.createElement("article");
       todoArticle.innerHTML = `
       <h2>${todo.title}</h2>
@@ -26,15 +26,25 @@ export function renderTodos(todos, section, todosType = "") {
       const removeButton = document.createElement("button");
       removeButton.textContent = "Remove";
       removeButton.addEventListener("click", () => {
-        if (todo.priority === "Urgent") urgentTodos.splice(index, 1);
+        if (todo.priority === "Urgent") {
+          const index = urgentTodos.indexOf(todo);
+          urgentTodos.splice(index, 1);
+        }
+
         if (todo.type === "Personal") {
+          const index = personalTodos.indexOf(todo);
           personalTodos.splice(index, 1);
         } else if (todo.type === "Work") {
+          const index = workTodos.indexOf(todo);
           workTodos.splice(index, 1);
         } else {
+          const index = otherTodos.indexOf(todo);
           otherTodos.splice(index, 1);
         }
+
+        const index = otherTodos.indexOf(todo);
         allTodos.splice(index, 1);
+
         home(todos);
       });
 

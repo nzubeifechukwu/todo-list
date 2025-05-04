@@ -1,4 +1,5 @@
 import { addNewTodo } from "./addTodo";
+import { getTodos } from "./persistData";
 import { renderTodos, renderTodosByType } from "./renderTodos";
 
 export function home(todos) {
@@ -26,6 +27,7 @@ export function home(todos) {
 
   const todosSection = document.querySelector("#todos");
 
+  getTodos();
   renderTodos(todos, todosSection);
 
   const addTodoButton = document.querySelector("#add-todo-btn");

@@ -1,5 +1,6 @@
 import { editTodo } from "./editTodo";
 import { home } from "./home";
+import { storeTodos } from "./persistData";
 import {
   allTodos,
   personalTodos,
@@ -45,6 +46,8 @@ export function renderTodos(todos, section, todosType = "") {
         const index = otherTodos.indexOf(todo);
         allTodos.splice(index, 1);
 
+        storeTodos();
+        
         home(todos);
       });
 

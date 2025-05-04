@@ -1,4 +1,5 @@
 import { home } from "./home";
+import { storeTodos } from "./persistData";
 import {
   allTodos,
   otherTodos,
@@ -278,6 +279,7 @@ export function editTodo(id, todos) {
         allTodos.splice(index, 1, selectedTodo);
       }
 
+      storeTodos();
       home(todos);
     }
   });

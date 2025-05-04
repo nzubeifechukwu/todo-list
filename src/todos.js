@@ -9,8 +9,8 @@ export class Todo {
   }
 }
 
-export const allTodos = [];
-export const personalTodos = [];
-export const workTodos = [];
-export const otherTodos = [];
-export const urgentTodos = [];
+export let allTodos = [];
+export let personalTodos = [];
+export let workTodos = [];
+export let otherTodos = [];
+export let urgentTodos = [];

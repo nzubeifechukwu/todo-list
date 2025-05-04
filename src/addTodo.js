@@ -1,4 +1,5 @@
 import { home } from "./home";
+import { storeTodos } from "./persistData";
 import {
   Todo,
   allTodos,
@@ -116,6 +117,7 @@ export function addNewTodo() {
 
       if (priority === "Urgent") urgentTodos.push(newTodo);
 
+      storeTodos();
       home(allTodos);
     }
   });

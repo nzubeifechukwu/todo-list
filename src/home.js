@@ -26,11 +26,6 @@ export function home(todos) {
 
   const todosSection = document.querySelector("#todos");
 
-  // if (todos.length) {
-  //   renderTodos(todos, todosSection);
-  // } else {
-  //   todosSection.innerHTML = `<h2>You have no ${todosType} todos.</h2>`;
-  // }
   renderTodos(todos, todosSection);
 
   const addTodoButton = document.querySelector("#add-todo-btn");

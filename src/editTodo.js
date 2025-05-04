@@ -1,4 +1,5 @@
 import { home } from "./home";
+import { otherTodos, personalTodos, urgentTodos, workTodos } from "./todos";
 
 export function editTodo(id, todos) {
   const months = [
@@ -183,6 +184,10 @@ export function editTodo(id, todos) {
   let priority = document.querySelector('input[name="priority"]:checked').value; // Get value of previously checked radio button
   let type = document.querySelector('input[name="type"]:checked').value; // Get value of previously checked radio button
 
+  // Use these to possibly remove/add todo in different todos list group(s)
+  const previousPriority = priority;
+  const previousType = type;
+
   titleInput.addEventListener(
     "change",
     () => (title = titleInput.value.trim())
@@ -209,6 +214,36 @@ export function editTodo(id, todos) {
   otherRadio.addEventListener("change", () => (type = otherRadio.value));
 
   submitButton.addEventListener("click", () => {
+    if (previousPriority !== priority) {
+      if (priority === "Urgent") {
+        urgentTodos.push(selectedTodo);
+      } else {
+        const index = urgentTodos.indexOf(selectedTodo);
+        urgentTodos.splice(index, 1);
+      }
+    }
+
+    if (previousType !== type) {
+      if (type === "Personal") {
+        personalTodos.push(selectedTodo);
+      } else if (type === "Work") {
+        workTodos.push(selectedTodo);
+      } else {
+        otherTodos.push(selectedTodo);
+      }
+
+      if (previousType === "Personal") {
+        const index = personalTodos.indexOf(selectedTodo);
+        personalTodos.splice(index, 1);
+      } else if (previousType === "Work") {
+        const index = workTodos.indexOf(selectedTodo);
+        workTodos.splice(index, 1);
+      } else {
+        const index = otherTodos.indexOf(selectedTodo);
+        otherTodos.splice(index, 1);
+      }
+    }
+
     if (!title) {
       alert("Please input todo title");
     } else {

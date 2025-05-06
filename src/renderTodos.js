@@ -43,7 +43,7 @@ export function renderTodos(todos, section, todosType = "") {
           otherTodos.splice(index, 1);
         }
 
-        const index = otherTodos.indexOf(todo);
+        const index = allTodos.indexOf(todo);
         allTodos.splice(index, 1);
 
         storeTodos();

@@ -23,41 +23,9 @@ export function editTodo(id, todos) {
     Nov: "11",
     Dec: "12",
   };
-  const days = [
-    "01",
-    "02",
-    "03",
-    "04",
-    "05",
-    "06",
-    "07",
-    "08",
-    "09",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
-    "18",
-    "19",
-    "20",
-    "21",
-    "22",
-    "23",
-    "24",
-    "25",
-    "26",
-    "27",
-    "28",
-    "29",
-    "30",
-    "31",
-  ];
   const body = document.querySelector("body");
   const selectedTodo = todos.find((todo) => id === todo.id);
+  console.log(selectedTodo.dueDate);
   body.innerHTML = `
     <h1>Edit Todo</h1>
     <form>
@@ -73,9 +41,9 @@ export function editTodo(id, todos) {
         <label for="due-date">Due Date</label
         ><input type="date" name="due-date" id="due-date" value="${selectedTodo.dueDate.slice(
           11
-        )}-${months[selectedTodo.dueDate.slice(4, 7)]}-${
-    days[selectedTodo.dueDate.slice(8, 10)]
-  }" />
+        )}-${
+    months[selectedTodo.dueDate.slice(4, 7)]
+  }-${selectedTodo.dueDate.slice(8, 10)}" />
       </fieldset>
       <fieldset id="priority-fieldset">
       </fieldset>

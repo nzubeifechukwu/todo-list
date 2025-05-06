@@ -1,12 +1,12 @@
 import { editTodo } from "./editTodo";
 import { home } from "./home";
-import { storeTodos } from "./persistData";
 import {
   allTodos,
   personalTodos,
   workTodos,
   otherTodos,
   urgentTodos,
+  storeTodos,
 } from "./todos";
 
 export function renderTodos(todos, section, todosType = "") {
@@ -19,7 +19,7 @@ export function renderTodos(todos, section, todosType = "") {
       <p><strong>Description: </strong>${
         todo.description ? todo.description : ""
       }</p>
-      <p><strong>Due Date: </strong>${todo.dueDate.toDateString()}</p>
+      <p><strong>Due Date: </strong>${todo.dueDate}</p>
       <p><strong>Priority: </strong>${todo.priority}</p>
       <p><strong>Type: </strong>${todo.type}</p>
     `;
@@ -47,7 +47,6 @@ export function renderTodos(todos, section, todosType = "") {
         allTodos.splice(index, 1);
 
         storeTodos();
-        
         home(todos);
       });
 

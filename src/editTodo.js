@@ -1,30 +1,29 @@
 import { home } from "./home";
-import { storeTodos } from "./persistData";
 import {
   allTodos,
   otherTodos,
   personalTodos,
   urgentTodos,
   workTodos,
+  storeTodos,
 } from "./todos";
 
 export function editTodo(id, todos) {
-  const months = [
-    "01",
-    "02",
-    "03",
-    "04",
-    "05",
-    "06",
-    "07",
-    "08",
-    "09",
-    "10",
-    "11",
-    "12",
-  ];
+  const months = {
+    Jan: "01",
+    Feb: "02",
+    Mar: "03",
+    Apr: "04",
+    May: "05",
+    Jun: "06",
+    Jul: "07",
+    Aug: "08",
+    Sep: "09",
+    Oct: "10",
+    Nov: "11",
+    Dec: "12",
+  };
   const days = [
-    "00",
     "01",
     "02",
     "03",
@@ -72,9 +71,11 @@ export function editTodo(id, todos) {
           selectedTodo.description
         }" />
         <label for="due-date">Due Date</label
-        ><input type="date" name="due-date" id="due-date" value="${selectedTodo.dueDate.getFullYear()}-${
-    months[selectedTodo.dueDate.getMonth()]
-  }-${days[selectedTodo.dueDate.getDate()]}" />
+        ><input type="date" name="due-date" id="due-date" value="${selectedTodo.dueDate.slice(
+          11
+        )}-${months[selectedTodo.dueDate.slice(4, 7)]}-${
+    days[selectedTodo.dueDate.slice(8, 10)]
+  }" />
       </fieldset>
       <fieldset id="priority-fieldset">
       </fieldset>
@@ -265,9 +266,9 @@ export function editTodo(id, todos) {
           new Date().getFullYear(),
           new Date().getMonth(),
           new Date().getDate() + 1
-        );
+        ).toDateString();
       } else {
-        selectedTodo.dueDate = new Date(dueDate);
+        selectedTodo.dueDate = new Date(dueDate).toDateString();
       }
 
       selectedTodo.priority = priority;

@@ -1,5 +1,4 @@
 import { home } from "./home";
-import { storeTodos } from "./persistData";
 import {
   Todo,
   allTodos,
@@ -7,6 +6,7 @@ import {
   workTodos,
   otherTodos,
   urgentTodos,
+  storeTodos,
 } from "./todos";
 
 export function addNewTodo() {
@@ -66,7 +66,9 @@ export function addNewTodo() {
   const submitButton = document.querySelector("#submit");
 
   let title, description, dueDate;
-  let priority = document.querySelector('input[name="priority"]:checked').value; // Get value of default-checked radio button
+
+  // Get values of default-checked radio buttons
+  let priority = document.querySelector('input[name="priority"]:checked').value;
   let type = document.querySelector('input[name="type"]:checked').value;
 
   titleInput.addEventListener(
@@ -101,8 +103,9 @@ export function addNewTodo() {
       if (!description) description = "nil";
       if (!dueDate || new Date(dueDate) < new Date()) {
         // set to tomorrow's date if dueDate is undefined or earlier than today's date
-        dueDate = new Date();
-        dueDate = dueDate.setDate(dueDate.getDate() + 1);
+        dueDate = new Date(
+          new Date().setDate(new Date().getDate() + 1)
+        ).toDateString();
       }
       const newTodo = new Todo(title, description, dueDate, priority, type);
       allTodos.push(newTodo);

@@ -12,9 +12,9 @@ With this todo list, you can:
 - edit tasks
 - remove tasks
 - group tasks according to their urgency
-- group tasks according by other categories such as "personal", "work" and "other".
+- group tasks by other categories such as "personal", "work" and "other".
 
-Your tasks persist between page reloads.
+Tasks persist between page reloads.
 
 ## Tools/Languages
 

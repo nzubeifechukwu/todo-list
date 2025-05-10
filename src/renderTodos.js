@@ -63,7 +63,7 @@ export function renderTodos(todos, section, todosType = "") {
       section.appendChild(todoArticle);
     });
   } else {
-    section.innerHTML = `<h2>You have no ${todosType} todos.</h2>`;
+    section.innerHTML = `<h2>You have no ${todosType} todos</h2>`;
   }
 }
 

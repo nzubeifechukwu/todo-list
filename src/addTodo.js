@@ -11,17 +11,17 @@ import {
 
 export function addNewTodo() {
   const body = document.querySelector("body");
-  body.innerHTML = `<h1>Add New Todo</h1>
+  body.innerHTML = `<h1 id="add-new-todo">Add New Todo</h1>
     <form action="">
-      <fieldset>
+      <fieldset id="todo-main-info">
         <div><label for="title">Title</label
         ><input type="text" name="title" id="title" /></div>
-        <div><label for="description">Description</label
+        <div><label for="description" id="description-label">Description</label
         ><textarea name="description" id="description"></textarea></div>
         <div><label for="due-date">Due Date</label
         ><input type="date" name="due-date" id="due-date" /></div>
       </fieldset>
-      <fieldset>
+      <fieldset class="radio-fieldset">
         <p>Priority</p>
         <div>
           <input type="radio" name="priority" id="urgent" value="Urgent" /><label
@@ -34,7 +34,7 @@ export function addNewTodo() {
           >Not Urgent</label>
         </div>
       </fieldset>
-      <fieldset>
+      <fieldset class="radio-fieldset">
         <p>Type</p>
         <div>
           <input type="radio" name="type" id="personal" value="Personal" /><label

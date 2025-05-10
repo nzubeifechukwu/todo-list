@@ -21,7 +21,11 @@ export function home(todos) {
         <button type="button" id="add-todo-btn">Add Todo</button>
       </div>
     </main>
-    <footer><small>&copy; Nzube Ifechukwu</small></footer>
+    <footer>
+      <small>
+        <a href="https://github.com/nzubeifechukwu/todo-list" target="_blank">&copy; Nzube Ifechukwu</a>
+      </small>
+    </footer>
   `;
 
   const todosSection = document.querySelector("#todos");

@@ -27,27 +27,33 @@ export function editTodo(id, todos) {
   const selectedTodo = todos.find((todo) => id === todo.id);
   console.log(selectedTodo.dueDate);
   body.innerHTML = `
-    <h1>Edit Todo</h1>
+    <h1 id="edit-todo">Edit Todo</h1>
     <form>
-      <fieldset>
-        <label for="title">Title</label
-        ><input type="text" name="title" id="title" value="${
-          selectedTodo.title
-        }" />
-        <label for="description">Description</label
-        ><input type="text" name="description" id="description" value="${
-          selectedTodo.description
-        }" />
-        <label for="due-date">Due Date</label
-        ><input type="date" name="due-date" id="due-date" value="${selectedTodo.dueDate.slice(
-          11
-        )}-${
+      <fieldset id="todo-main-info">
+        <div>
+          <label for="title">Title</label
+          ><input type="text" name="title" id="title" value="${
+            selectedTodo.title
+          }" />
+        </div>
+        <div>
+          <label for="description" id="description-label">Description</label
+          ><textarea name="description" id="description">${
+            selectedTodo.description
+          }</textarea>
+        </div>
+        <div>
+          <label for="due-date">Due Date</label
+          ><input type="date" name="due-date" id="due-date" value="${selectedTodo.dueDate.slice(
+            11
+          )}-${
     months[selectedTodo.dueDate.slice(4, 7)]
   }-${selectedTodo.dueDate.slice(8, 10)}" />
+        </div>
       </fieldset>
-      <fieldset id="priority-fieldset">
+      <fieldset id="priority-fieldset" class="radio-fieldset">
       </fieldset>
-      <fieldset id="type-fieldset">
+      <fieldset id="type-fieldset" class="radio-fieldset">
       </fieldset>
       <fieldset><button type="button" id="submit">Submit</button></fieldset>
     </form>

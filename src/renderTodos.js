@@ -25,6 +25,7 @@ export function renderTodos(todos, section, todosType = "") {
     `;
 
       const removeButton = document.createElement("button");
+      removeButton.id = "remove-btn";
       removeButton.textContent = "Remove";
       removeButton.addEventListener("click", () => {
         if (todo.priority === "Urgent") {
@@ -51,6 +52,7 @@ export function renderTodos(todos, section, todosType = "") {
       });
 
       const editButton = document.createElement("button");
+      editButton.id = "edit-btn";
       editButton.textContent = "Edit";
       editButton.addEventListener("click", () => {
         editTodo(todo.id, todos);
@@ -73,17 +75,53 @@ export function renderTodosByType(section) {
   const urgentButton = document.querySelector("#urgent-btn");
   section = document.querySelector("#todos");
 
-  allButton.addEventListener("click", () => renderTodos(allTodos, section));
-  personalButton.addEventListener("click", () =>
-    renderTodos(personalTodos, section, "personal")
-  );
-  workButton.addEventListener("click", () =>
-    renderTodos(workTodos, section, "work")
-  );
-  otherButton.addEventListener("click", () =>
-    renderTodos(otherTodos, section, "unclassified")
-  );
-  urgentButton.addEventListener("click", () =>
-    renderTodos(urgentTodos, section, "urgent")
-  );
+  allButton.addEventListener("click", () => {
+    personalButton.style.backgroundColor = "#284b63";
+    allButton.style.backgroundColor = "#0081a7";
+    workButton.style.backgroundColor = "#284b63";
+    urgentButton.style.backgroundColor = "#284b63";
+    otherButton.style.backgroundColor = "#284b63";
+
+    renderTodos(allTodos, section);
+  });
+
+  personalButton.addEventListener("click", () => {
+    allButton.style.backgroundColor = "#284b63";
+    personalButton.style.backgroundColor = "#0081a7";
+    workButton.style.backgroundColor = "#284b63";
+    urgentButton.style.backgroundColor = "#284b63";
+    otherButton.style.backgroundColor = "#284b63";
+
+    renderTodos(personalTodos, section, "personal");
+  });
+
+  workButton.addEventListener("click", () => {
+    personalButton.style.backgroundColor = "#284b63";
+    workButton.style.backgroundColor = "#0081a7";
+    allButton.style.backgroundColor = "#284b63";
+    urgentButton.style.backgroundColor = "#284b63";
+    otherButton.style.backgroundColor = "#284b63";
+
+    renderTodos(workTodos, section, "work");
+  });
+
+  otherButton.addEventListener("click", () => {
+    personalButton.style.backgroundColor = "#284b63";
+    otherButton.style.backgroundColor = "#0081a7";
+    workButton.style.backgroundColor = "#284b63";
+    urgentButton.style.backgroundColor = "#284b63";
+    allButton.style.backgroundColor = "#284b63";
+
+    renderTodos(otherTodos, section, "other");
+  });
+
+  urgentButton.addEventListener("click", () => {
+    personalButton.style.backgroundColor = "#284b63";
+    urgentButton.style.backgroundColor = "#0081a7";
+    workButton.style.backgroundColor = "#284b63";
+    allButton.style.backgroundColor = "#284b63";
+    otherButton.style.backgroundColor = "#284b63";
+
+    renderTodos(urgentTodos, section, "urgent");
+  });
 }
